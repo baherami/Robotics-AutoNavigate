@@ -15,9 +15,9 @@ This demo contains codes that are fully tested and verified on Windows 10.
 
 ### Installation
 
-* Download the simulator for (Linux)[https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Linux_Roversim.zip], (Mac)[https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Mac_Roversim.zip] or (Windows)[https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Windows_Roversim.zip]. 
-* Install (Jupyter Notebook)  [http://jupyter.org/]
-* Create the environment and install its dependencies from (here)[https://github.com/ryan-keenan/RoboND-Python-Starterkit/blob/master/doc/configure_via_anaconda.md].
+* Download the simulator for [Linux](https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Linux_Roversim.zip), [Mac](https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Mac_Roversim.zip) or [Windows](https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Windows_Roversim.zip). 
+* Install [Jupyter Notebook]  (http://jupyter.org/)
+* Create the environment and install its dependencies from [here](https://github.com/ryan-keenan/RoboND-Python-Starterkit/blob/master/doc/configure_via_anaconda.md).
 * From terminal activate environment.
 
 
@@ -26,22 +26,31 @@ There is a notebook in the project to validate the perception phase based on cap
 To run the notebook :
 * From the activated terminal and in the project root, run: jupyter notebook
 ### Running in the autonomous mode.
-* Execute Python in the active environment : '''python code/drive_rover.py '''
+* Execute Python in the active environment : `python code/drive_rover.py`
 * Run the simulator and choose autonomous mode.
+
+---
 
 ### Notebook's Notes:
 **test dataset**
-Captured images are in '''test_dataset'''.
+
+Captured images are in `test_dataset`.
+
 **color_thresh**
-Recognizing objects  is done with usual RGB threshholding and (opencv HSV color threshing method)[http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html]
+
+Recognizing objects  is done with usual RGB threshholding and [opencv HSV color threshing method](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html)
 
 **process_image**
+
 In this function the output mosaic image is rendered with mapping and rover cam view and threshed rover cam view.
 
 ### Autonomous Navigation and Mapping 
+
 **Perception**
+
 Same logic is used in perception.py for processing images.
+
 **Decision**
+
 In decision.py, a simple mechanism is used to collect rock samples. Two new modes added to the rover for this purpose.
 
-**
