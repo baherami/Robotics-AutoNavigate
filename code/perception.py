@@ -23,11 +23,10 @@ def color_thresh(img, rgb_thresh=(160, 160, 160),objectType="terrain"):
         above_thresh = (img[:,:,0] > rgb_thresh[0]) \
                     & (img[:,:,1] > rgb_thresh[1]) \
                     & (img[:,:,2] > rgb_thresh[2])
-        #if(objectType=='obstacles'):
-        #    above_thresh= np.logical_not(above_thresh)
+        if(objectType=='obstacles'):
+             above_thresh= np.logical_not(above_thresh)
         color_select[above_thresh]= 1
 		
-        pprint(color_select)
     # Index the array of zeros with the boolean array and set to 1
     
     # Return the binary image
@@ -123,18 +122,17 @@ def perception_step(Rover):
 	warped = perspect_transform(Rover.img, source, destination)
 
     # 3) Apply color threshold to identify navigable terrain/obstacles/rock samples
-	terrain = color_thresh(Rover.img)
-	obstacles = color_thresh(Rover.img,objectType='obstacles')
-	rocks = color_thresh(Rover.img,objectType='rocks')
-        
-    # 4) Update Rover.vision_image (this will be displayed on left side of screen)
+	terrain = color_thresh(warped)
+	obstacles = color_thresh(warped,objectType='obstacles')
+	rocks = color_thresh(warped,objectType='rocks')
+	# 4) Update Rover.vision_image (this will be displayed on left side of screen)
         # Example: Rover.vision_image[:,:,0] = obstacle color-thresholded binary image
         #          Rover.vision_image[:,:,1] = rock_sample color-thresholded binary image
         #           Rover.vision_image[:,:,2] = navigable terrain color-thresholded binary image
-	
-	Rover.vision_image[:,:,0] =obstacles
-	Rover.vision_image[:,:,2] =rocks
-	Rover.vision_image[:,:,1] =terrain
+	Rover.vision_image[:,:,0] =obstacles*250
+	Rover.vision_image[:,:,2] =terrain*250
+	Rover.vision_image[:,:,1] =rocks
+	       
     
 	# 5) Convert map image pixel values to rover-centric coords
 	terrain_xpix, terrain_ypix = rover_coords(terrain)
@@ -171,5 +169,5 @@ def perception_step(Rover):
         # Rover.nav_angles = rover_centric_angles
 	Rover.nav_dists = dist
 	Rover.nav_angles = ang
-	print(Rover.mode,np.mean(dist),np.clip(np.mean(ang * 180/np.pi),-100,100))
+	#print(Rover.mode,np.mean(dist),np.clip(np.mean(ang * 180/np.pi),-100,100))
 	return Rover

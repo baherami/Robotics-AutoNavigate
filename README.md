@@ -4,10 +4,10 @@ The goal of this project is to provide simple perception, decision making and ac
 This project has been tested with the following specs:
 
 
->OS:Windows 10
->RAM: 16GB
->Sim Screen: 800*600,Good,Display1,Windowed
-(FPS output to terminal by `drive_rover.py`) 
+* OS:Windows 10
+* RAM: 16GB
+* Sim Screen: 800*600,Good,Display1,Windowed
+* FPS output retrieved from drive_rover.py= 27 
 
 This demo contains codes that are fully tested and verified on Windows 10.
 
@@ -16,7 +16,7 @@ This demo contains codes that are fully tested and verified on Windows 10.
 ### Installation
 
 * Download the simulator for [Linux](https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Linux_Roversim.zip), [Mac](https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Mac_Roversim.zip) or [Windows](https://s3-us-west-1.amazonaws.com/udacity-robotics/Rover+Unity+Sims/Windows_Roversim.zip). 
-* Install [Jupyter Notebook]  (http://jupyter.org/)
+* Install [Jupyter Notebook](http://jupyter.org/)
 * Create the environment and install its dependencies from [here](https://github.com/ryan-keenan/RoboND-Python-Starterkit/blob/master/doc/configure_via_anaconda.md).
 * From terminal activate environment.
 
