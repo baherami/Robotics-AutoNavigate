@@ -54,15 +54,20 @@ class RoverState():
         self.ground_truth = ground_truth_3d # Ground truth worldmap
         self.mode = 'forward' # Current mode (can be forward or stop)
         self.throttle_set = 0.2 # Throttle setting when accelerating
-        self.brake_set = 10 # Brake setting when braking
+        self.brake_set = 20 # Brake setting when braking
         # The stop_forward and go_forward fields below represent total count
         # of navigable terrain pixels.  This is a very crude form of knowing
         # when you can keep going and when you should stop.  Feel free to
         # get creative in adding new fields or modifying these!
         self.stop_forward = 50 # Threshold to initiate stopping
         self.go_forward = 500 # Threshold to go forward again
-        self.max_vel = 2 # Maximum velocity (meters/second)
-        # Image output from perception step
+        self.go_for_rock=20 #based on distance 
+        self.stop_for_rock=5# based on distance
+        self.max_vel = 6 # Maximum velocity (meters/second)
+        self.prevYaw=None
+        self.prevRoll=None
+        self.sameNavigationCount=0
+		# Image output from perception step
         # Update this image to display your intermediate analysis steps
         # on screen in autonomous mode
         self.vision_image = np.zeros((160, 320, 3), dtype=np.float) 
@@ -99,7 +104,7 @@ def telemetry(sid, data):
         fps = frame_counter
         frame_counter = 0
         second_counter = time.time()
-    print("Current FPS: {}".format(fps))
+    #print("Current FPS: {}".format(fps))
 
     if data:
         global Rover
@@ -150,7 +155,7 @@ def telemetry(sid, data):
 
 @sio.on('connect')
 def connect(sid, environ):
-    print("connect ", sid)
+    #print("connect ", sid)
     send_control((0, 0, 0), '', '')
     sample_data = {}
     sio.emit(
@@ -175,7 +180,7 @@ def send_control(commands, image_string1, image_string2):
     eventlet.sleep(0)
 # Define a function to send the "pickup" command 
 def send_pickup():
-    print("Picking up")
+    #print("Picking up")
     pickup = {}
     sio.emit(
         "pickup",
@@ -195,15 +200,15 @@ if __name__ == '__main__':
     
     #os.system('rm -rf IMG_stream/*')
     if args.image_folder != '':
-        print("Creating image folder at {}".format(args.image_folder))
+        #print("Creating image folder at {}".format(args.image_folder))
         if not os.path.exists(args.image_folder):
             os.makedirs(args.image_folder)
         else:
             shutil.rmtree(args.image_folder)
             os.makedirs(args.image_folder)
-        print("Recording this run ...")
-    else:
-        print("NOT recording this run ...")
+        #print("Recording this run ...")
+    #else:
+        #print("NOT recording this run ...")
     
     # wrap Flask application with socketio's middleware
     app = socketio.Middleware(sio, app)
