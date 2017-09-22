@@ -2,10 +2,11 @@
 [//]: # (Image References)
 
 [image1]: ./misc/rover_image.jpg
-[image2]: ./calibration_images/example_grid1.jpg
-[image3]: ./calibration_images/example_rock1.jpg 
+[image2]: ./misc/finished_mission.jpg
+
 
 ![Navigator][image1]
+
 The goal of this project is to provide simple perception, decision making and actuation for autonoumous navigation of a robot in a simulator. The simulator is written in Unity.
 This project has been tested with the following specs:
 
@@ -52,10 +53,18 @@ In this function the output mosaic image is rendered with mapping and rover cam 
 
 ### Autonomous Navigation and Mapping 
 
+![Navigator][image1]
+
+It has been a difficult challange to write and test an algorithm which could be used for autonomous navigation and mapping. The algorithm works for over 80 percent of mapping and fidelity while the benchmarks are far away from optimization. The next phase of this project should optimize the calculation.
+ 
 **Perception**
 
-Same logic is used in perception.py for processing images.
+The logic in perception.py for processing images is the same as the jupyter notebook methods.
 
 **Decision**
 
-In decision.py, a simple mechanism is used to collect rock samples. Two new modes added to the rover for this purpose.
+In decision.py, a simple mechanism is used to collect rock samples. Two new modes added to the rover for this purpose to get closer to rocks while navigation angles and distances are filtered by a function so that the robot would navigate from sides.
+
+For cases that samples are seen a minimum distance between rock and navigable route is calculated.
+
+For cases that robot gets stuck or starts to turn around itself or follow a circle-like path, three counter mechanisms are used to find out and prevent the robot to follow up the same path.
