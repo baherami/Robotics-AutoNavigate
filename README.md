@@ -1,5 +1,11 @@
 ## Project: Search and Sample Return
+[//]: # (Image References)
 
+[image1]: ./misc/rover_image.jpg
+[image2]: ./calibration_images/example_grid1.jpg
+[image3]: ./calibration_images/example_rock1.jpg 
+
+[image1]
 The goal of this project is to provide simple perception, decision making and actuation for autonoumous navigation of a robot in a simulator. The simulator is written in Unity.
 This project has been tested with the following specs:
 
@@ -7,7 +13,7 @@ This project has been tested with the following specs:
 * OS:Windows 10
 * RAM: 16GB
 * Sim Screen: 800*600,Good,Display1,Windowed
-* FPS output retrieved from drive_rover.py= 27 
+* FPS output had the following values: None,15,31,29,31,29,30,26,...  
 
 This demo contains codes that are fully tested and verified on Windows 10.
 
@@ -53,4 +59,3 @@ Same logic is used in perception.py for processing images.
 **Decision**
 
 In decision.py, a simple mechanism is used to collect rock samples. Two new modes added to the rover for this purpose.
-

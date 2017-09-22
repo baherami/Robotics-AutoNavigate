@@ -51,22 +51,33 @@ class RoverState():
         self.brake = 0 # Current brake value
         self.nav_angles = None # Angles of navigable terrain pixels
         self.nav_dists = None # Distances of navigable terrain pixels
+        self.rock_angles=None
+        self.rock_dists=None		
         self.ground_truth = ground_truth_3d # Ground truth worldmap
         self.mode = 'forward' # Current mode (can be forward or stop)
         self.throttle_set = 0.2 # Throttle setting when accelerating
-        self.brake_set = 20 # Brake setting when braking
+        self.brake_set = 1 # Brake setting when braking
         # The stop_forward and go_forward fields below represent total count
         # of navigable terrain pixels.  This is a very crude form of knowing
         # when you can keep going and when you should stop.  Feel free to
         # get creative in adding new fields or modifying these!
-        self.stop_forward = 50 # Threshold to initiate stopping
-        self.go_forward = 500 # Threshold to go forward again
-        self.go_for_rock=20 #based on distance 
+        self.stop_forward = 200 # Threshold to initiate stopping
+        self.stop_forward_dist=20
+        self.go_forward_dist=50
+        self.go_forward = 300 # Threshold to go forward again
+        self.go_for_rock=10 #based on distance 
         self.stop_for_rock=5# based on distance
-        self.max_vel = 6 # Maximum velocity (meters/second)
-        self.prevYaw=None
-        self.prevRoll=None
-        self.sameNavigationCount=0
+        self.max_vel = 4 # Maximum velocity (meters/second)
+        self.elseCounter=0 # to avoid an endless none state
+        self.fps=0 # keeping a record of all fps frames
+        self.prevFps=0
+        self.prevPos=None
+        self.samePositionCount=0
+        self.moveCount=0
+        self.stopCount=0		
+        self.radious=10
+        self.backwardCount=0
+        self.prevMode=None
 		# Image output from perception step
         # Update this image to display your intermediate analysis steps
         # on screen in autonomous mode
@@ -74,7 +85,7 @@ class RoverState():
         # Worldmap
         # Update this image with the positions of navigable terrain
         # obstacles and rock samples
-        self.worldmap = np.zeros((200, 200, 3), dtype=np.float) 
+        self.worldmap = np.zeros((200, 200, 3), dtype =np.float) 
         self.samples_pos = None # To store the actual sample positions
         self.samples_to_find = 0 # To store the initial count of samples
         self.samples_located = 0 # To store number of samples located on map
@@ -104,13 +115,13 @@ def telemetry(sid, data):
         fps = frame_counter
         frame_counter = 0
         second_counter = time.time()
-    print("Current FPS: {}".format(fps))
-
+    #print("Current FPS: {}".format(fps))
+    Rover.fps=fps
     if data:
         global Rover
         # Initialize / update Rover with current telemetry
         Rover, image = update_rover(Rover, data)
-
+        #print(data)
         if np.isfinite(Rover.vel):
 
             # Execute the perception and decision steps to update the Rover's state
