@@ -53,7 +53,7 @@ In this function the output mosaic image is rendered with mapping and rover cam 
 
 ### Autonomous Navigation and Mapping 
 
-![Navigator][image1]
+![Navigator][image2]
 
 It has been a difficult challange to write and test an algorithm which could be used for autonomous navigation and mapping. The algorithm works for over 80 percent of mapping and fidelity while the benchmarks are far away from optimization. The next phase of this project should optimize the calculation.
  
