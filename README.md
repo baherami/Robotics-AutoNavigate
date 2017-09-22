@@ -5,7 +5,7 @@
 [image2]: ./calibration_images/example_grid1.jpg
 [image3]: ./calibration_images/example_rock1.jpg 
 
-[image1]
+![Navigator][image1]
 The goal of this project is to provide simple perception, decision making and actuation for autonoumous navigation of a robot in a simulator. The simulator is written in Unity.
 This project has been tested with the following specs:
 
